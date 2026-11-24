@@ -1582,3 +1582,141 @@ a {
         display: none;
     }
 }
+
+/* Fit the hero headline on narrow phones */
+@media (max-width: 480px) {
+    #home .home-info .text-dec {
+        font-size: clamp(2.4rem, 12vw, 4rem);
+        overflow-wrap: anywhere;
+    }
+}
+
+/* Mobile menu (opened by the hamburger button) */
+@media (max-width: 1024px) {
+    .navbar.menu-open .menu-link {
+        display: block;
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0;
+        right: 0;
+        background-color: #fff;
+        border: 2px solid #000;
+        border-radius: 16px;
+        box-shadow: rgb(0, 0, 0) 4px 4px 0px 0px;
+        padding: 12px 24px;
+    }
+
+    .navbar.menu-open .menu-link ul {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .navbar.menu-open .menu-link .separator {
+        display: none;
+    }
+
+    .navbar.menu-open .menu-link li:has(.separator) {
+        display: none;
+    }
+
+    .navbar.menu-open .menu-link a {
+        display: block;
+        padding: 10px 0;
+        font-size: 1rem;
+    }
+}
+
+/* Decorative bar under the subtitles: keep it below the text when the text wraps */
+@media (max-width: 768px) {
+    #authors .authors-title p::before,
+    #community .title p::before {
+        top: calc(100% + 6px);
+    }
+}
+
+/* Let the hero buttons wrap on very narrow phones */
+@media (max-width: 480px) {
+    #home .home-info .buttons {
+        flex-wrap: wrap;
+    }
+}
+
+.form-demo-note {
+    margin-top: 12px;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+#footer .form-demo-note {
+    color: #fff;
+}
+
+/* Demo notice and message box */
+#concept-pill {
+    position: fixed;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: fit-content;
+    bottom: 12px;
+    text-transform: none;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: calc(100% - 24px);
+    padding: 8px 8px 8px 16px;
+    border: 2px solid #000;
+    border-radius: 999px;
+    background: #fff;
+    color: #000;
+    font-size: 0.8rem;
+    font-weight: 600;
+    box-shadow: 3px 3px 0 #000;
+}
+
+#concept-pill button {
+    border: 2px solid #000;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    line-height: 20px;
+    background: #FFD21E;
+    color: #000;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#demo-toast {
+    position: fixed;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: fit-content;
+    bottom: 64px;
+    text-transform: none;
+    z-index: 2001;
+    max-width: calc(100% - 24px);
+    padding: 10px 16px;
+    border: 2px solid #000;
+    background: #FFD21E;
+    color: #000;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 3px 3px 0 #000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+#demo-toast.show {
+    opacity: 1;
+}
+
+#footer .concept-note {
+    text-align: center;
+    color: #bbb;
+    font-size: 0.85rem;
+    padding: 12px 16px 72px;
+}
