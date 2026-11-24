@@ -415,9 +415,82 @@
         </div>
 
 
+        <p class="concept-note">Concept demo for portfolio use. The articles, authors, numbers and community shown here are sample content, not a real publication.</p>
     </div>
 
 
+    <script>
+        (function () {
+            var nav = document.querySelector('.navbar');
+            var toggle = document.querySelector('.navbar .button-container a');
+            if (nav && toggle) {
+                toggle.setAttribute('aria-label', 'Open menu');
+                toggle.setAttribute('aria-expanded', 'false');
+                var setOpen = function (open) {
+                    nav.classList.toggle('menu-open', open);
+                    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+                    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+                };
+                toggle.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    setOpen(!nav.classList.contains('menu-open'));
+                });
+                nav.querySelectorAll('.menu-link a').forEach(function (a) {
+                    a.addEventListener('click', function () { setOpen(false); });
+                });
+                document.addEventListener('keydown', function (e) {
+                    if (e.key === 'Escape') setOpen(false);
+                });
+            }
+
+            // Message box and concept notice. The page has no backend, so buttons that have no feature say so.
+            var toast = document.createElement('div');
+            toast.id = 'demo-toast';
+            toast.setAttribute('role', 'status');
+            document.body.appendChild(toast);
+            var toastTimer;
+            window.showDemoToast = function (text) {
+                toast.textContent = text;
+                toast.classList.add('show');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 3500);
+            };
+            document.addEventListener('click', function (e) {
+                var dead = e.target.closest('a[href="#"]:not(.button-container a), #home .buttons .secondary, .load-btn, .join-btn');
+                if (dead) {
+                    e.preventDefault();
+                    window.showDemoToast('Demo only: this button is not connected to a feature.');
+                }
+            });
+            var pill = document.createElement('div');
+            pill.id = 'concept-pill';
+            pill.innerHTML = '<span>Concept demo: sample content, not a real publication.</span><button type="button" aria-label="Dismiss notice">&times;</button>';
+            pill.querySelector('button').addEventListener('click', function () { pill.remove(); });
+            document.body.appendChild(pill);
+
+            // START READING goes to the articles
+            var start = document.querySelector('#home .buttons .primary');
+            if (start) {
+                start.addEventListener('click', function () {
+                    var target = document.getElementById('last-articles');
+                    if (target) target.scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+
+            // The newsletter form is not connected to a service, so do not reload the page or pretend it worked
+            var form = document.querySelector('.newsletter-form');
+            if (form) {
+                var note = document.createElement('p');
+                note.className = 'form-demo-note';
+                note.setAttribute('role', 'status');
+                form.parentNode.insertBefore(note, form.nextSibling);
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    note.textContent = 'This is a demo page, so signups are not connected.';
+                });
+            }
+        })();
+    </script>
 </body>
 
 </html>
